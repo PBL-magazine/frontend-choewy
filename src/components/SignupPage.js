@@ -19,6 +19,15 @@ const SignupPage = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+
+    const { email, nickname, password, confirmPassword } = userDto;
+
+    if (!email) return alert('이메일 형식을 확인하세요.');
+    if (!nickname) return alert('닉넨임 형식을 확인하세요.');
+    if (!password) return alert('비밀번호 형식을 확인하세요.');
+    if (password !== confirmPassword)
+      return alert('비밀번호가 일치하지 않습니다.');
+
     const { ok, message } = await UserActions.signup(userDto);
     if (!ok) return alert(message);
     window.location.pathname = '/';

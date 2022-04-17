@@ -40,6 +40,11 @@ const PostWritePage = () => {
   };
 
   const onSubmitButtonClick = async () => {
+    const { content, image } = postDto;
+
+    if (!content) return alert('게시물 내용을 입력하세요.');
+    if (!image) return alert('이미지 파일을 선택하세요.');
+
     const { ok, message } = await PostActions.addPost(postDto);
     if (!ok) return alert(message);
     navigate('/');

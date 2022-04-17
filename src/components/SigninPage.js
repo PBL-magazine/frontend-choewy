@@ -17,6 +17,12 @@ const SigninPage = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+
+    const { email, password } = userDto;
+
+    if (!email) return alert('이메일 형식을 확인하세요.');
+    if (!password) return alert('이메일 형식을 확인하세요.');
+
     const { ok, message } = await UserActions.signin(userDto);
     if (!ok) return alert(message);
     window.location.pathname = '/';

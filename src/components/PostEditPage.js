@@ -28,8 +28,12 @@ const PostEditPage = () => {
   };
 
   const onSubmitButtonClick = async () => {
-    const { ok, message } = await PostActions.updatePost(post_id, postDto);
+    const { content } = postDto;
+    if (!content) return alert('게시물 내용을 입력하세요.');
+
+    const { ok, message } = await PostActions.updatePost(post_id, { content });
     if (!ok) return alert(message);
+
     navigate(`/post/${post_id}`);
   };
 
