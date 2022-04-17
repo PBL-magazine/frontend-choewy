@@ -10,6 +10,8 @@ import SigninPage from './components/SigninPage';
 import SignupPage from './components/SignupPage';
 import SignoutPage from './components/SignoutPage';
 import './App.css';
+import PostComments from './components/PostComments';
+import PostCommentWrite from './components/PostCommentWrite';
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -29,6 +31,8 @@ const App = () => {
   const HeaderProps = { user };
   const PostPageProps = { user };
   const PostDetailPageProps = { user };
+  const PostCommentWriteProps = { user };
+  const PostCommentsProps = { user };
 
   return (
     <div className="app">
@@ -45,7 +49,13 @@ const App = () => {
         />
         <Route
           path="/post/:post_id"
-          element={<PostDetailPage {...PostDetailPageProps} />}
+          element={
+            <>
+              <PostDetailPage {...PostDetailPageProps} />
+              <PostCommentWrite {...PostCommentWriteProps} />
+              <PostComments {...PostCommentsProps} />
+            </>
+          }
         />
         <Route
           path="/signup"
