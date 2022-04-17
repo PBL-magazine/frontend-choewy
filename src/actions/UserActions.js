@@ -1,6 +1,7 @@
 import Axios from '../utils/Axios';
 
 const UserActions = {
+  /* 로그아웃을 요청하며, 서버로부터 비어있는 토큰을 쿠키로 전달받습니다. */
   signout: async () => {
     return await Axios.delete('/api/users/signout').then((response) => {
       const {
@@ -9,15 +10,9 @@ const UserActions = {
       return ok;
     });
   },
+
+  /* 회원가입을 요청하며, 성공 시 서버로부터 유효한 토큰을 쿠키로 전달받습니다. */
   signup: async (userDto) => {
-    const { email, nickname, password, confirmPassword } = userDto;
-
-    if (!email) return alert('이메일 형식을 확인하세요.');
-    if (!nickname) return alert('닉넨임 형식을 확인하세요.');
-    if (!password) return alert('비밀번호 형식을 확인하세요.');
-    if (password !== confirmPassword)
-      return alert('비밀번호가 일치하지 않습니다.');
-
     return await Axios.post('/api/users/signup', userDto)
       .then((response) => {
         const {
@@ -35,11 +30,8 @@ const UserActions = {
       });
   },
 
+  /* 로그인을 요청하며, 성공 시 서버로부터 유효한 토큰을 쿠키로 전달받습니다. */
   signin: async (userDto) => {
-    const { email, password } = userDto;
-
-    if (!email) return alert('이메일 형식을 확인하세요.');
-    if (!password) return alert('이메일 형식을 확인하세요.');
     return await Axios.post('/api/users/signin', userDto)
       .then((response) => {
         const {
@@ -57,6 +49,7 @@ const UserActions = {
       });
   },
 
+  /* 로그인 상태 유지를 위해 서버로부터 현재 쿠키의 유효성을 평가받습니다. */
   authorize: async () => {
     return await Axios.get('/api/users/auth')
       .then((response) => {
