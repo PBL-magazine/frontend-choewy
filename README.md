@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+# Magazine Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- 서버 코드 테스트를 위해 간단하게 프론트 부분을 구현해보았습니다.
 
-## Available Scripts
+## 테스트 내용
 
-In the project directory, you can run:
+- 사용자 인증(회원가입, 로그인, 인증 상태 유지)
+- 게시물 조회, 작성, 수정, 삭제
+- 게시물 좋아요 기능
+- 게시물 댓글 조회, 작성, 수정, 삭제
+- 서버 측 미들웨어 예외 처리
 
-### `npm start`
+## 팀원들에게 남길 내용
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- 로그아웃 기능을 구현하는 과정에서 임시로 API를 추가하였습니다.
+- 좋아요 기능을 구현하는 과정에서 서버 측의 API 응답 데이터를 일부 추가하였습니다(이에 관련된 내용은 협의가 필요할 것으로 보입니다).
+- 위 두 개의 사항에 대해서는 직접 말씀드릴 예정이며, 그 밖에 궁금한 사항이 있으신 경우 언제든 질문 또는 이슈 남겨주세요.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 직접 실행하는 방법
 
-### `npm test`
+### Git Clone
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+$ git clone https://github.com/PBL-magazine/frontend-choewy.git
+```
 
-### `npm run build`
+### npm install
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+$ cd frontend-choewy
+$ npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### package.json
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```json
+{
+  "proxy": "자신의 로컬 서버 주소를 넣으세요"
+}
+```
 
-### `npm run eject`
+### Run
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+$ npm start
+```
