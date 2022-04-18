@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import PostActions from '../actions/PostActions';
 
@@ -8,15 +8,16 @@ const PostPage = (props) => {
   const navitgate = useNavigate();
   const [post, setPost] = useState(null);
 
+  const getPost = useCallback(async () => {
+    const { ok, row, message } = await PostActions.getPost(post_id);
+    if (!ok) return alert(message);
+    setPost(row);
+  }, [post_id]);
+
   useEffect(() => {
-    const getPost = async () => {
-      const { ok, row, message } = await PostActions.getPost(post_id);
-      if (!ok) return alert(message);
-      setPost(row);
-    };
     getPost();
     return () => {};
-  }, [post_id]);
+  }, [getPost]);
 
   if (post === null) return <></>;
 
