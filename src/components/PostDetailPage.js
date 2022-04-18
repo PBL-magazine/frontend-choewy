@@ -88,7 +88,7 @@ const PostPage = (props) => {
         <div>
           <button onClick={onLikeButtonClick}>{renderLikeButtonText()}</button>
           {' : '}
-          {post.likes}
+          {post.likes.length}
         </div>
       </div>
     </div>
