@@ -12,7 +12,7 @@
 
 ## 협의 사항
 
-- [Issue #1 - 좋아요 개수 처리 및 로그아웃 기능 회의](https://github.com/PBL-magazine/frontend-choewy/issues/1)
+- [[Issue #1] 좋아요 개수 처리 및 로그아웃 기능 회의](https://github.com/PBL-magazine/frontend-choewy/issues/1)
 
 ## 프론트엔드 분들께 전달할 내용
 
