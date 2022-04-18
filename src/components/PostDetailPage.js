@@ -32,7 +32,8 @@ const PostPage = (props) => {
   };
 
   const renderOwnerButton = () => {
-    if (user && user.user_id === post.user.user_id) {
+    const isEditable = user.user_id === post.user.user_id || user.role === 1;
+    if (user && isEditable) {
       return (
         <div>
           <button onClick={onEditButtonClick}>수정</button>

@@ -10,7 +10,8 @@ const PostEditPage = () => {
   const getPost = useCallback(async () => {
     const { ok, row, message } = await PostActions.getPost(post_id);
     if (!ok) return alert(message);
-    setPostDto(row);
+    const { content, image_url } = row;
+    setPostDto({ content, image_url });
   }, [post_id]);
 
   useEffect(() => {
@@ -32,6 +33,7 @@ const PostEditPage = () => {
     if (!content) return alert('게시물 내용을 입력하세요.');
 
     const { ok, message } = await PostActions.updatePost(post_id, { content });
+    console.log(ok, message);
     if (!ok) return alert(message);
 
     navigate(`/post/${post_id}`);

@@ -59,7 +59,11 @@ const PostComment = (props) => {
 
   const renderOwnerButton = () => {
     if (user === null) return <></>;
-    if (user.user_id === comment.user_id) {
+
+    const isAdmin = user.role === 1;
+    const isOwner = user.user_id === comment.user_id;
+
+    if (isAdmin || isOwner) {
       if (editable)
         return (
           <div>
