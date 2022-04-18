@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Navigate, Routes, Route } from 'react-router-dom';
 import UserActions from './actions/UserActions';
 import Header from './components/Header';
@@ -16,15 +16,16 @@ import PostCommentWrite from './components/PostCommentWrite';
 const App = () => {
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    const checkAuthrization = async () => {
-      const { ok, user } = await UserActions.authorize();
-      if (ok) return setUser(user);
-      setUser(false);
-    };
-    checkAuthrization();
-    return () => {};
+  const checkAuth = useCallback(async () => {
+    const { ok, user } = await UserActions.authorize();
+    if (ok) return setUser(user);
+    setUser(false);
   }, []);
+
+  useEffect(() => {
+    checkAuth();
+    return () => {};
+  }, [checkAuth]);
 
   if (user === null) return <></>;
 

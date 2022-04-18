@@ -27,7 +27,7 @@ const PostCommentWrite = (props) => {
     );
     if (!ok) return alert(message);
 
-    // Redux를 쓰면 새로고침하지 않아도 됨
+    /* Redux 적용 후 새로고침 대신 다시 API 요청하여 store 상태 업데이트 */
     window.location.reload();
   };
 

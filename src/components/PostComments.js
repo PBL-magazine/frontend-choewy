@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import CommentActions from '../actions/CommentActions';
 import PostComment from './PostComment';
@@ -8,15 +8,16 @@ const PostComments = (props) => {
   const { post_id } = useParams();
   const [comments, setComments] = useState(null);
 
+  const getComments = useCallback(async () => {
+    const { ok, rows, message } = await CommentActions.getComments(post_id);
+    if (!ok) return alert(message);
+    setComments(rows);
+  }, [post_id]);
+
   useEffect(() => {
-    const getComments = async () => {
-      const { ok, rows, message } = await CommentActions.getComments(post_id);
-      if (!ok) return alert(message);
-      setComments(rows);
-    };
     getComments();
     return () => {};
-  }, [post_id]);
+  }, [getComments]);
 
   if (comments === null) return <></>;
 
