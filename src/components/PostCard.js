@@ -11,12 +11,21 @@ const PostCard = (props) => {
     return <img src={image_url} alt="post_image" />;
   };
 
-  const renderLikeButtonText = () => {
-    if (!user) return '좋아요';
+  const renderLikeButton = () => {
+    let buttonText = '좋아요';
 
-    const likesUserIds = post.likes.map((like) => like.user_id);
-    if (likesUserIds.includes(user.user_id)) return '좋아요 취소';
-    return '좋아요';
+    if (user) {
+      const likesUserIds = post.likes.map((like) => like.user_id);
+      buttonText = likesUserIds.includes(user.user_id)
+        ? '좋아요 취소'
+        : '좋아요';
+    }
+
+    return (
+      <button onClick={onLikeButtonClick}>
+        {buttonText}({post.likes.length})
+      </button>
+    );
   };
 
   const onLikeButtonClick = async () => {
@@ -43,12 +52,7 @@ const PostCard = (props) => {
         </Link>
       </div>
       <div>{post.content}</div>
-      <div>
-        <button onClick={() => onLikeButtonClick()}>
-          {renderLikeButtonText()}
-        </button>{' '}
-        : {post.likes.length}
-      </div>
+      <div>{renderLikeButton()}</div>
     </div>
   );
 };

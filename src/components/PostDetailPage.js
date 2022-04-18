@@ -47,10 +47,21 @@ const PostPage = (props) => {
     return <img src={post.image_url} alt="post_image" />;
   };
 
-  const renderLikeButtonText = () => {
-    const likesUserIds = post.likes.map((like) => like.user_id);
-    if (likesUserIds.includes(user.user_id)) return '좋아요 취소';
-    return '좋아요';
+  const renderLikeButton = () => {
+    let buttonText = '좋아요';
+
+    if (user) {
+      const likesUserIds = post.likes.map((like) => like.user_id);
+      buttonText = likesUserIds.includes(user.user_id)
+        ? '좋아요 취소'
+        : '좋아요';
+    }
+
+    return (
+      <button onClick={onLikeButtonClick}>
+        {buttonText}({post.likes.length})
+      </button>
+    );
   };
 
   const onLikeButtonClick = async () => {
@@ -71,14 +82,6 @@ const PostPage = (props) => {
       {renderOwnerButton()}
       <div>
         <div>
-          <h3>이미지</h3>
-          {renderPostImage()}
-        </div>
-        <div>
-          <h3>내용</h3>
-          <p>{post.content}</p>
-        </div>
-        <div>
           <h3>게시물 정보</h3>
           <p>닉네임 : {post.user.nickname}</p>
           <p>이메일 : {post.user.email}</p>
@@ -86,10 +89,14 @@ const PostPage = (props) => {
           <p>수정일자 : {post.updatedAt}</p>
         </div>
         <div>
-          <button onClick={onLikeButtonClick}>{renderLikeButtonText()}</button>
-          {' : '}
-          {post.likes.length}
+          <h3>이미지</h3>
+          {renderPostImage()}
         </div>
+        <div>
+          <h3>내용</h3>
+          <p>{post.content}</p>
+        </div>
+        <div>{renderLikeButton()}</div>
       </div>
     </div>
   );
