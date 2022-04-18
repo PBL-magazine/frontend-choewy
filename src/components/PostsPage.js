@@ -24,30 +24,24 @@ const PostsPage = (props) => {
   const renderLikeButtonText = (post) => {
     if (!user) return '좋아요';
 
-    const likesUserIds = post.likesDetail.map(
-      (likesDetail) => likesDetail.user_id,
-    );
+    const likesUserIds = post.likes.map((like) => like.user_id);
     if (likesUserIds.includes(user.user_id)) return '좋아요 취소';
     return '좋아요';
   };
 
   const onLikeButtonClick = async (post) => {
-    const { ok, like, message } = await PostActions.likePost(post.post_id);
+    const { ok, message } = await PostActions.likePost(post.post_id);
     if (!ok) return alert(message);
 
-    const likes = like ? post.likes + 1 : post.likes - 1;
-    const likesDetail = like
-      ? [
-          ...post.likesDetail,
-          { post_id: post.post_id, user_id: user.user_id, user },
-        ]
-      : post.likesDetail.filter(
-          (likesDetail) => likesDetail.user_id !== user.user_id,
-        );
+    const isLike = post.likes.find((like) => like.user_id === user.user_id);
+
+    const likes = isLike
+      ? post.likes.filter((like) => like.user_id !== user.user_id)
+      : [...post.likes, { user_id: user.user_id }];
 
     setPosts(
       posts.map((row) =>
-        row.post_id === post.post_id ? { ...row, likes, likesDetail } : row,
+        row.post_id === post.post_id ? { ...row, likes } : row,
       ),
     );
   };
@@ -72,7 +66,7 @@ const PostsPage = (props) => {
                 <button onClick={() => onLikeButtonClick(post)}>
                   {renderLikeButtonText(post)}
                 </button>{' '}
-                : {post.likes}
+                : {post.likes.length}
               </div>
             </div>
           </div>
