@@ -1,17 +1,13 @@
 import axios from 'axios';
-import { Cookies } from 'react-cookie';
+import { getTokenFromCookie } from './Cookie';
 
-const cookies = new Cookies();
+const setHeaderAuthorization = (token) => {
+  axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+};
 
 const Axios = () => {
-  /* 쿠키에서 토큰 정보를 가져옵니다. */
-  const token = cookies.get('token');
-
-  /* 토큰 정보를 요청 Header에 추가합니다. */
-  if (token) {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  }
-
+  const token = getTokenFromCookie();
+  token && setHeaderAuthorization(token);
   return axios;
 };
 

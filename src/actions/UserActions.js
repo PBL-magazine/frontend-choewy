@@ -1,15 +1,9 @@
 import Axios from '../utils/Axios';
+import { removeTokenFromCookie } from '../utils/Cookie';
 
 const UserActions = {
-  /* 로그아웃을 요청하며, 서버로부터 비어있는 토큰을 쿠키로 전달받습니다. */
-  signout: async () => {
-    return await Axios.delete('/api/users/signout').then((response) => {
-      const {
-        data: { ok },
-      } = response;
-      return ok;
-    });
-  },
+  /* 쿠키에서 토큰을 삭제하여 로그아웃 처리 */
+  signout: () => removeTokenFromCookie(),
 
   /* 회원가입을 요청하며, 성공 시 서버로부터 유효한 토큰을 쿠키로 전달받습니다. */
   signup: async (userDto) => {
