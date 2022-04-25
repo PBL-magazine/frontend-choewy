@@ -41,12 +41,19 @@ $ cd frontend-choewy
 $ npm install
 ```
 
-### package.json
 
-```json
-{
-  "proxy": "자신의 로컬 서버 주소를 넣으세요"
-}
+## /src/setupProxy.js 수정
+
+```javascript
+module.exports = function(app) {
+  app.use(
+    '/api',
+    createProxyMiddleware({
+      target: 'http://localhost:5000', // target host API 서버 입력
+      changeOrigin: true,
+    })
+  );
+};
 ```
 
 ### Run
