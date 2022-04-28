@@ -44,10 +44,18 @@ $ npm install
 
 ## /src/setupProxy.js 수정
 
+- app.js 에 아래와 같이 설정했다면  
+
+```javascript
+app.use("/uploads", express.static('./uploads'))
+```
+
+- 아래와 같이 수정해 준다
+
 ```javascript
 module.exports = function(app) {
   app.use(
-    '/api',
+    ['/api','/uploads'],
     createProxyMiddleware({
       target: 'http://localhost:5000', // target host API 서버 입력
       changeOrigin: true,
